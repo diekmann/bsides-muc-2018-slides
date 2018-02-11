@@ -1,0 +1,171 @@
+%!TEX program = xelatex
+\documentclass{beamer}
+
+\usepackage{blindtext}
+
+\usetheme{Execushares}
+
+\title{A New Beamer Theme That Works Well and Looks Great: Execushares}
+\subtitle{A custom modern minimalist Beamer theme designed from scratch}
+\author{Kenton Hamaluik}
+\date{June 1, 2014}
+
+\setcounter{showSlideNumbers}{1}
+
+
+
+
+\newcommand{\hairspace}{\hspace{1pt}}
+\newcommand{\eg}{\mbox{e.\hairspace{}g.,} }  % z.B.
+\newcommand{\ie}{\mbox{i.\hairspace{}e.,} }  % d.h.
+\newcommand{\Ie}{\mbox{I.\hairspace{}e.,} }  % d.h.
+\newcommand{\cf}{\mbox{cf.}\ }
+\newcommand{\etal}{\mbox{et~al.}\ }
+
+\usepackage{fancyvrb}
+
+\usepackage{IEEEtrantools}
+
+%https://tex.stackexchange.com/questions/220820/itemize-list-inside-a-tikzpicture-node
+\usepackage{varwidth}
+
+% math typesetting
+% free variables
+\newcommand{\mvar}[1]{\ensuremath{\mathit{#1}}}
+% definitions and constants
+\newcommand{\mdef}[1]{\ensuremath{\mathsf{#1}}}
+% executable functions
+\newcommand{\mfun}[1]{\mdef{#1}}
+%datatype constructor (may appear in text)
+\newcommand\mconstr[1]{\mdef{#1}}
+%math control (if then else)
+\newcommand\mctrl[1]{\ensuremath{\mathbf{#1}}}
+
+
+\newcommand{\BigO}{\mathcal{O}}
+
+
+\DeclareMathSymbol{\mlq}{\mathord}{operators}{``}
+\DeclareMathSymbol{\mrq}{\mathord}{operators}{`'}
+
+
+\newcommand\mdoubleplus{\ensuremath{\mathbin{+\mkern-10mu+}}}
+\newcommand\lstapp{\ensuremath{\mathbin{:\mkern-1mu:\mkern-1mu:}}} %list append
+\newcommand\lstcons{\ensuremath{\mathbin{:\mkern-1mu:}}} %list append
+
+
+\newcommand{\free}[1]{\textcolor{DarkerBlue}{#1}}
+\newcommand{\bound}[1]{\textcolor{DarkGreen}{#1}}
+%\newcommand{\boundi}[1]{\textcolor{Green}{#1}}
+
+
+\newcommand*\circled[1]{\tikz[baseline=-3pt, scale=0.5, every node/.style={scale=0.5}]{\node[shape=circle,draw,inner sep=1pt,minimum size=16pt] (char) {#1};}}
+
+\newcommand\allow{\ensuremath{\textnormal{\circled{\large \textbf{\checkmark}}}}}
+\newcommand\deny{\ensuremath{\textnormal{\circled{\large \textbf{\texttimes}}}}}
+\newcommand\undecided{\ensuremath{\textnormal{\circled{\textnormal{\large \textbf{?}}}}}}
+
+\newcommand\matchop[1]{\ensuremath{\mfun{match}\ {#1}}}
+\newcommand\matches[1]{\ensuremath{\matchop\gamma \ #1 \ p}}
+\newcommand\nmatches[1]{\ensuremath{\neg\; \matchop\gamma \ #1 \ p}}
+\newcommand\bigstep[3]{\ensuremath{\free{\Gamma},\free{\gamma},\free{p} \vdash\big\langle #1,\; #2 \big\rangle \Rightarrow #3}}
+
+
+
+
+
+
+\begin{document}
+	\setcounter{showProgressBar}{0}
+	\setcounter{showSlideNumbers}{0}
+
+	\frame{\titlepage}
+
+	\begin{frame}
+		\frametitle{Contents}
+		\begin{enumerate}
+			\item Introduction \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} The reasoning and background behind this theme}
+			\item Lorem Text  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Just some Lorem Ipsum for filler}
+			\item Conclusions \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Some closing thoughts}
+		\end{enumerate}
+	\end{frame}
+
+	\setcounter{framenumber}{0}
+	\setcounter{showProgressBar}{1}
+	\setcounter{showSlideNumbers}{1}
+	\section{Introduction}
+		\begin{frame}
+			\frametitle{Why Beamer?}
+			\begin{enumerate}
+				\item LaTeX is great!
+				\item Beamer is easy to use!
+				\item Why not?
+			\end{enumerate}
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Why Custom Themes?}
+			\begin{itemize}
+				\item The default Beamer themes are outdated and visually displeasing
+				\item There aren't many Beamer themes readily available online
+				\item Making custom Beamer themes is easy!
+			\end{itemize}
+		\end{frame}
+		
+
+		\begin{frame}
+			\frametitle{Theorem!}
+				Assumes	
+	\begin{itemize}
+		\item Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
+		\item $\free{\mvar{p}}$ is \texttt{NEW}% and has \texttt{SYN} set (if TCP)
+		\item $\bigstep{\free{\mvar{rs}}}{\undecided}{\allow}$
+		\item Let $(\free{V}, \free{E}) = \mfun{matrix}\ (\mdef{iifce}\ \free{p}, \mdef{oifce}\ \free{p}, \mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
+	\end{itemize}
+	Shows%
+	\begin{center}%
+		\vskip-3ex%
+	    \begin{IEEEeqnarray*}{l}
+		\exists \bound{\mvar{s}_\text{repr}}\ \bound{\mvar{d}_\text{repr}}\ \bound{\mvar{s}_\text{range}}\ \bound{\mvar{d}_\text{range}}.\ \ (\bound{\mvar{s}_\text{repr}}, \bound{\mvar{d}_\text{repr}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
+		\qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{s}_\text{repr}} = \mdef{Some}\ \bound{\mvar{s}_\text{range}} \ \wedge \ (\mdef{src}\ \free{\mvar{p}}) \in \bound{\mvar{s}_\text{range}} \ \wedge \\
+		\qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{d}_\text{repr}} = \mdef{Some}\ \bound{\mvar{d}_\text{range}} \ \wedge \ (\mdef{dst}\ \free{\mvar{p}}) \in \bound{\mvar{d}_\text{range}}
+		\end{IEEEeqnarray*}
+	\end{center}
+	\medskip
+	%Reads: If the firewall accepts a packet, we can look up source and destination IP in the graph.
+	
+		\end{frame}
+
+	\section{Lorem Ipsum}
+		\begin{frame}
+			\frametitle{Lorem 1}
+			\blindtext
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Lorem 2}
+			\blindtext
+		\end{frame}
+
+		\begin{frame}
+			\frametitle{Lorem 3}
+			\blindtext
+		\end{frame}
+
+	\section{Conclusions}
+		\begin{frame}
+			\frametitle{Closing Thoughts}
+			\begin{itemize}
+				\item Woo, Beamer!
+			\end{itemize}
+		\end{frame}
+	
+	\appendix
+	\backupbegin
+	  \begin{frame}
+	    \frametitle{Backup slide 1}
+	    \blindtext
+	  \end{frame}
+	\backupend
+
+\end{document}
