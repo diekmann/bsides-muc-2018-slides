@@ -1,14 +1,13 @@
-%!TEX program = xelatex
-\documentclass{beamer}
+\documentclass[aspectratio=169]{beamer}
 
 \usepackage{blindtext}
 
 \usetheme{Execushares}
 
-\title{A New Beamer Theme That Works Well and Looks Great: Execushares}
-\subtitle{A custom modern minimalist Beamer theme designed from scratch}
-\author{Kenton Hamaluik}
-\date{June 1, 2014}
+\title{Formal Methods to the Rescue? Experiences Coding in a Theorem Prover}
+\subtitle{\url{https://github.com/diekmann/} \  @popitter\_net}
+\author{Cornelius Diekmann}
+\date{April 9, 2018}
 
 \setcounter{showSlideNumbers}{1}
 
@@ -16,9 +15,9 @@
 
 
 \newcommand{\hairspace}{\hspace{1pt}}
-\newcommand{\eg}{\mbox{e.\hairspace{}g.,} }  % z.B.
-\newcommand{\ie}{\mbox{i.\hairspace{}e.,} }  % d.h.
-\newcommand{\Ie}{\mbox{I.\hairspace{}e.,} }  % d.h.
+\newcommand{\eg}{\mbox{e.\hairspace{}g.,} }
+\newcommand{\ie}{\mbox{i.\hairspace{}e.,} }
+\newcommand{\Ie}{\mbox{I.\hairspace{}e.,} }
 \newcommand{\cf}{\mbox{cf.}\ }
 \newcommand{\etal}{\mbox{et~al.}\ }
 
@@ -76,96 +75,109 @@
 
 
 \begin{document}
-	\setcounter{showProgressBar}{0}
-	\setcounter{showSlideNumbers}{0}
+\setcounter{showProgressBar}{0}
+\setcounter{showSlideNumbers}{0}
 
-	\frame{\titlepage}
+\frame{\titlepage}
 
-	\begin{frame}
-		\frametitle{Contents}
-		\begin{enumerate}
-			\item Introduction \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} The reasoning and background behind this theme}
-			\item Lorem Text  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Just some Lorem Ipsum for filler}
-			\item Conclusions \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Some closing thoughts}
-		\end{enumerate}
+\begin{frame}
+	\frametitle{Contents}
+	\begin{enumerate}
+		\item Introduction \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} The reasoning and background behind this theme}
+		\item Lorem Text  \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Just some Lorem Ipsum for filler}
+		\item Conclusions \\ \textcolor{ExecusharesGrey}{\footnotesize\hspace{1em} Some closing thoughts}
+	\end{enumerate}
+\end{frame}
+
+
+\setcounter{framenumber}{0}
+\setcounter{showProgressBar}{1}
+\setcounter{showSlideNumbers}{1}
+\section{Introduction}
+
+\begin{frame}
+	\frametitle{Why Beamer?}
+	\begin{enumerate}
+		\item LaTeX is great!
+		\item Beamer is easy to use!
+		\item Why not?
+	\end{enumerate}
+\end{frame}
+
+\begin{frame}
+	\frametitle{Why Custom Themes?}
+	\begin{itemize}
+		\item The default Beamer themes are outdated and visually displeasing
+		\item There aren't many Beamer themes readily available online
+		\item Making custom Beamer themes is easy!
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Theorem!}
+		Assumes	
+    \begin{itemize}
+	    \item Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
+	    \item $\free{\mvar{p}}$ is \texttt{NEW}% and has \texttt{SYN} set (if TCP)
+	    \item $\bigstep{\free{\mvar{rs}}}{\undecided}{\allow}$
+	    \item Let $(\free{V}, \free{E}) = \mfun{matrix}\ (\mdef{iifce}\ \free{p}, \mdef{oifce}\ \free{p}, \mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
+    \end{itemize}
+    Shows%
+    \begin{center}%
+	    \vskip-3ex%
+        \begin{IEEEeqnarray*}{l}
+	    \exists \bound{\mvar{s}_\text{repr}}\ \bound{\mvar{d}_\text{repr}}\ \bound{\mvar{s}_\text{range}}\ \bound{\mvar{d}_\text{range}}.\ \ (\bound{\mvar{s}_\text{repr}}, \bound{\mvar{d}_\text{repr}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{s}_\text{repr}} = \mdef{Some}\ \bound{\mvar{s}_\text{range}} \ \wedge \ (\mdef{src}\ \free{\mvar{p}}) \in \bound{\mvar{s}_\text{range}} \ \wedge \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{d}_\text{repr}} = \mdef{Some}\ \bound{\mvar{d}_\text{range}} \ \wedge \ (\mdef{dst}\ \free{\mvar{p}}) \in \bound{\mvar{d}_\text{range}}
+	    \end{IEEEeqnarray*}
+    \end{center}
+    \medskip
+    %Reads: If the firewall accepts a packet, we can look up source and destination IP in the graph.
 	\end{frame}
 
-	\setcounter{framenumber}{0}
-	\setcounter{showProgressBar}{1}
-	\setcounter{showSlideNumbers}{1}
-	\section{Introduction}
-		\begin{frame}
-			\frametitle{Why Beamer?}
-			\begin{enumerate}
-				\item LaTeX is great!
-				\item Beamer is easy to use!
-				\item Why not?
-			\end{enumerate}
-		\end{frame}
 
-		\begin{frame}
-			\frametitle{Why Custom Themes?}
-			\begin{itemize}
-				\item The default Beamer themes are outdated and visually displeasing
-				\item There aren't many Beamer themes readily available online
-				\item Making custom Beamer themes is easy!
-			\end{itemize}
-		\end{frame}
-		
 
-		\begin{frame}
-			\frametitle{Theorem!}
-				Assumes	
-	\begin{itemize}
-		\item Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
-		\item $\free{\mvar{p}}$ is \texttt{NEW}% and has \texttt{SYN} set (if TCP)
-		\item $\bigstep{\free{\mvar{rs}}}{\undecided}{\allow}$
-		\item Let $(\free{V}, \free{E}) = \mfun{matrix}\ (\mdef{iifce}\ \free{p}, \mdef{oifce}\ \free{p}, \mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
-	\end{itemize}
-	Shows%
-	\begin{center}%
-		\vskip-3ex%
-	    \begin{IEEEeqnarray*}{l}
-		\exists \bound{\mvar{s}_\text{repr}}\ \bound{\mvar{d}_\text{repr}}\ \bound{\mvar{s}_\text{range}}\ \bound{\mvar{d}_\text{range}}.\ \ (\bound{\mvar{s}_\text{repr}}, \bound{\mvar{d}_\text{repr}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
-		\qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{s}_\text{repr}} = \mdef{Some}\ \bound{\mvar{s}_\text{range}} \ \wedge \ (\mdef{src}\ \free{\mvar{p}}) \in \bound{\mvar{s}_\text{range}} \ \wedge \\
-		\qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{d}_\text{repr}} = \mdef{Some}\ \bound{\mvar{d}_\text{range}} \ \wedge \ (\mdef{dst}\ \free{\mvar{p}}) \in \bound{\mvar{d}_\text{range}}
-		\end{IEEEeqnarray*}
-	\end{center}
-	\medskip
-	%Reads: If the firewall accepts a packet, we can look up source and destination IP in the graph.
-	
-		\end{frame}
+\section{Lorem Ipsum}
 
-	\section{Lorem Ipsum}
-		\begin{frame}
-			\frametitle{Lorem 1}
-			\blindtext
-		\end{frame}
+\begin{frame}
+	\frametitle{Lorem 1}
+	\blindtext
+\end{frame}
 
-		\begin{frame}
-			\frametitle{Lorem 2}
-			\blindtext
-		\end{frame}
+\begin{frame}
+	\frametitle{Lorem 2}
+	\blindtext
+\end{frame}
 
-		\begin{frame}
-			\frametitle{Lorem 3}
-			\blindtext
-		\end{frame}
+\begin{frame}
+	\frametitle{Lorem 3}
+	\blindtext
+\end{frame}
 
-	\section{Conclusions}
-		\begin{frame}
-			\frametitle{Closing Thoughts}
-			\begin{itemize}
-				\item Woo, Beamer!
-			\end{itemize}
-		\end{frame}
-	
-	\appendix
-	\backupbegin
-	  \begin{frame}
-	    \frametitle{Backup slide 1}
-	    \blindtext
-	  \end{frame}
-	\backupend
+
+
+\section{Conclusions}
+
+\begin{frame}
+	\frametitle{Closing Thoughts}
+	It took me over 3 years to code ~5k LoC. Not very impressive. However, that code is is correct! According to an independent self-conducted study (pun intended), it is also the best open-source iptables analyzer out there. The value is not the 5k LoC, but rather 5 Lines of Theorem which show that the 5k LoC are correct.
+
+In this talk, I don’t want to walk you over the 5k lines of machine-generated Haskell code. Nor do I want to show you the 50k lines of formalization needed. I just want to show you the 5 Lines of the Theorem. Is this enough to convince you about the correctness of the iptables analyzer?
+
+Neighbors, feel free to question anybody who does formalism for the sake of pretending to be a scientist. Formalism has a clear value: It is more expressive than our programming languages. And it is a nice language to precisely state the high-level requirements of our software. And here lies the true value: Computers understand rigorous formalism, too. Computers can check proofs, so you don’t have to. Just inspect 5 Lines of Theorem to get confidence in the correctness of 5k LoC. This approach seems to scale.*
+
+*) given an infinite supply of PhD students who do the proofs for you.
+\end{frame}
+
+
+
+\appendix
+\backupbegin
+  \begin{frame}
+    \frametitle{Backup slide 1}
+    \blindtext
+  \end{frame}
+\backupend
 
 \end{document}
