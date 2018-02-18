@@ -191,7 +191,7 @@ COMMIT
 
 
 \begin{frame}[fragile]
-	\frametitle{Visualized}
+	\frametitle{Visualized for HTTP}
 
 \resizebox{\linewidth}{!}{%
 \scriptsize
@@ -250,7 +250,7 @@ COMMIT
 
 \section{How to Specify Correctness?}
 
-\begin{frame}
+\begin{frame}[fragile]
 	\frametitle{Correctness Theorem!}
 		Assumes	
     \begin{itemize}
@@ -262,20 +262,43 @@ COMMIT
 	    	\item<4-> placeholder
 	    	\item<5-> TODO TikZ sources overlay example to read last part (which is quite self contained)
 	    \end{itemize}
-	    \item Let $(\free{V}, \free{E}) = \mfun{compute\_graph}\ \free{p}\ (\mfun{simplify}\ \free{\mvar{rs}})$
+	    \item Let $(\free{V}, \free{E}) = \mfun{compute\_graph}\ (\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
+	    \begin{itemize}
+	    	\item $(\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})$: Example $(\mvar{tcp}, 42242, 22)$
+	    \end{itemize}
     \end{itemize}
     Shows%
     \begin{center}%
 	    \vskip-3ex%
         \begin{IEEEeqnarray*}{l}
-	    \exists \bound{\mvar{s}_\text{repr}}\ \bound{\mvar{d}_\text{repr}}\ \bound{\mvar{s}_\text{range}}\ \bound{\mvar{d}_\text{range}}.\ \ (\bound{\mvar{s}_\text{repr}}, \bound{\mvar{d}_\text{repr}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
-	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{s}_\text{repr}} = \mdef{Some}\ \bound{\mvar{s}_\text{range}} \ \wedge \ (\mdef{src}\ \free{\mvar{p}}) \in \bound{\mvar{s}_\text{range}} \ \wedge \\
-	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \bound{\mvar{d}_\text{repr}} = \mdef{Some}\ \bound{\mvar{d}_\text{range}} \ \wedge \ (\mdef{dst}\ \free{\mvar{p}}) \in \bound{\mvar{d}_\text{range}}
+	    \exists \highlight<10>{\bound{\mvar{s}_\text{repr}}}\ \highlight<10>{\bound{\mvar{d}_\text{repr}}}\ \bound{\mvar{s}_\text{range}}\ \bound{\mvar{d}_\text{range}}.\ \ (\highlight<10>{\bound{\mvar{s}_\text{repr}}}, \highlight<10>{\bound{\mvar{d}_\text{repr}}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<10>{\bound{\mvar{s}_\text{repr}}} = \mdef{Some}\ \bound{\mvar{s}_\text{range}} \ \wedge \ (\mdef{src}\ \free{\mvar{p}}) \in \bound{\mvar{s}_\text{range}} \ \wedge \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<10>{\bound{\mvar{d}_\text{repr}}} = \mdef{Some}\ \bound{\mvar{d}_\text{range}} \ \wedge \ (\mdef{dst}\ \free{\mvar{p}}) \in \bound{\mvar{d}_\text{range}}
 	    \end{IEEEeqnarray*}
     \end{center}
     \medskip
     %Reads: If the firewall accepts a packet, we can look up source and destination IP in the graph.
-	\end{frame}
+
+	% such meta meta!
+	\begin{tikzpicture}[overlay]
+	    \node<5,6,7,8>[fill=white, draw=black, line width=3pt, inner sep=10pt] (tikzmeta) at (current page.center) {\begin{minipage}{.9\linewidth}
+\footnotesize
+\texttt{\textbackslash{}begin\{tikzpicture\}}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (\highlight<6>{a}) at (-4,-4) \{\highlight<7>{\$\textbackslash{}\{131.159.21.0 .. 131.159.21.255\textbackslash{}\}\$}\};}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (b) at (4,-4) \{\$\textbackslash{}\{131.159.15.240 .. 131.159.15.255\textbackslash{}\}\$\};}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (c) at (0,-6) \{\$\textbackslash{}\{127.0.0.0 .. 127.255.255.255\textbackslash{}\}\$\};}\\
+$\dots$\\
+
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<8>{a}) to (\highlight<8>{a});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<8>{a}) to (\highlight<8>{b});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<8>{a}) to (\highlight<8>{c});}\\
+$\dots$\\
+\verb~\textbackslash{}end\{tikzpicture\}~
+\end{minipage}};
+	\end{tikzpicture}
+\only<8>{}%force another slide    
+    
+\end{frame}
 
 
 \section{Stats}
