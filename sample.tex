@@ -13,6 +13,22 @@
 
 
 
+\usepackage{tikzsymbols} %\Snowman
+\mathchardef\mhyphen="2D % Define a "math hyphen"
+\usepackage{fancyvrb}
+
+
+\usetikzlibrary{shapes}
+\usetikzlibrary{calc}
+%\usetikzlibrary{decorations}
+\usetikzlibrary{arrows,decorations.markings}
+%this should make nicer arrows simpler:
+%requires at least TikZ 3.0.0!
+%\usetikzlibrary{arrows.meta}
+\usetikzlibrary{arrows.meta} %need pgf > 3.0.
+\tikzset{myptr/.style={-{Latex[scale=1.5]}}}
+
+
 
 \newcommand{\hairspace}{\hspace{1pt}}
 \newcommand{\eg}{\mbox{e.\hairspace{}g.,} }
@@ -73,12 +89,15 @@
 
 
 
+\input{highlight}
+
 
 \begin{document}
 \setcounter{showProgressBar}{0}
 \setcounter{showSlideNumbers}{0}
 
 \frame{\titlepage}
+
 
 \begin{frame}
 	\frametitle{Contents}
@@ -93,35 +112,146 @@
 \setcounter{framenumber}{0}
 \setcounter{showProgressBar}{1}
 \setcounter{showSlideNumbers}{1}
-\section{Introduction}
 
+
+\section{About Me}
 \begin{frame}
-	\frametitle{Why Beamer?}
-	\begin{enumerate}
-		\item LaTeX is great!
-		\item Beamer is easy to use!
-		\item Why not?
-	\end{enumerate}
+	\frametitle{About Me}
+	\begin{itemize}
+		\item I did this work as PhD.\ student at TUM
+		\begin{itemize}
+			\item Which was awesome!
+		\end{itemize}
+		\item Now work at Google
+		\begin{itemize}
+			\item Which is awesome, too!
+			\item This presentation is not related in any way to Google
+		\end{itemize}
+		\item Thoughts and opinions are my own!
+	\end{itemize}
 \end{frame}
 
+
+
+\section{Introduction}
+
+
+
+\begin{frame}[fragile]
+	\frametitle{iptables Example}
+	
+\begin{minipage}{\linewidth}
+%break symbol $\hookleftarrow$
+% frame=single,label=Upper Closure
+\footnotesize
+\begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`^=7}]
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT DROP [0:0]
+:DOS_PROTECT - [0:0]
+:GOOD~STUFF - [0:0]
+-A FORWARD -j DOS_PROTECT
+-A FORWARD -j GOOD~STUFF
+-A FORWARD -p tcp -m multiport ! --dports 80,443,6667,6697 -m hashlimit $\hfill\hookleftarrow$
+    --hashlimit-above 10/sec --hashlimit-burst 20 --hashlimit-mode srcip $\hfill\hookleftarrow$
+    --hashlimit-name aflood --hashlimit-srcmask 8 -j LOG
+-A FORWARD ! -i lo -s 127.0.0.0/8 -j DROP
+-A FORWARD -i internal -s 131.159.21.0/24 -j ACCEPT
+-A FORWARD -s 131.159.15.240/28 -d 131.159.21.0/24 -j DROP
+-A FORWARD -p tcp -d 131.159.15.240/28 -j ACCEPT
+-A FORWARD -i \textcolor{red}{\Snowman} -p tcp -s 131.159.15.240/28 -j ACCEPT
+-A GOOD~STUFF -i lo -j ACCEPT
+-A GOOD~STUFF -m state --state ESTABLISHED -j ACCEPT
+-A GOOD~STUFF -p icmp -m state --state RELATED -j ACCEPT
+-A DOS_PROTECT -i eth1 -p icmp -m icmp --icmp-type 8 $\dots$ --limit 1/sec -j RETURN
+-A DOS_PROTECT -i eth1 -p icmp -m icmp --icmp-type 8 -j DROP
+COMMIT
+\end{Verbatim}
+\end{minipage}%$%stupid texmaker
+
+\begin{tikzpicture}[overlay]
+	        %\node<15> (wat) at (current page.center) {\includegraphics[width=.45\linewidth]{wat.png}};
+	        %\node<16> (watserverfault) at ($(current page.center) + (0,-2ex)$) {\includegraphics[width=.80\linewidth]{watserverfault.png}};
+	        
+	        \node<2> (wat) at (current page.center) {\resizebox{.2\textwidth}{!}{\verb~-i~ \textcolor{red}{\Snowman}}};
+	        \node<3> (wat) at (current page.center) {\resizebox{.4\textwidth}{!}{\verb~-i~ \textcolor{red}{\Snowman}}};
+	        \node<4> (wat) at (current page.center) {\resizebox{.8\textwidth}{!}{\verb~-i~ \textcolor{red}{\Snowman}}};
+	        
+	        %\node<5> (snow1) at ($(current page.center) + (0,-2ex)$) {\frame{\includegraphics[width=.80\linewidth]{iplinksnowman.png}}};
+	\end{tikzpicture}
+\end{frame}
+
+
+\begin{frame}[fragile]
+	\frametitle{Visualized}
+
+\resizebox{\linewidth}{!}{%
+\scriptsize
+  \begin{tikzpicture}
+  \node[align=left] (a) at (-4,-4) {$\{131.159.21.0 .. 131.159.21.255\}$}; %internal
+\node[align=left] (b) at (4,-4) {$\{131.159.15.240 .. 131.159.15.255\}$}; %dmz
+\node[align=left] (c) at (0,-6) {$\{127.0.0.0 .. 127.255.255.255\}$};
+\node[align=center,text width=4cm,cloud, draw,cloud puffs=10,cloud puff arc=120, aspect=2, inner sep=-3em,outer sep=0] (d) at (0,0) {$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$};
+
+\draw[myptr] (a) to[loop above] (a);
+\draw[myptr] (a) to (b);
+\draw[myptr] (a) to (c);
+\draw[myptr] (a) to (d);
+\draw[myptr] (b) to[loop above] (b);
+\draw[myptr] (b) to (c);
+\draw[myptr] (b) to (d);
+\draw[myptr] (c) to (a);
+\draw[myptr] (c) to (b);
+\draw[myptr] (c) to[loop above] (c);
+\draw[myptr] (c) to (d);
+\draw[myptr] (d) to (b);
+  \end{tikzpicture}%
+}
+\end{frame}
+
+
 \begin{frame}
-	\frametitle{Why Custom Themes?}
+	\frametitle{Bold Claim}
 	\begin{itemize}
-		\item The default Beamer themes are outdated and visually displeasing
-		\item There aren't many Beamer themes readily available online
-		\item Making custom Beamer themes is easy!
+		\item I coded a tool to print this visualization
+		\begin{itemize}
+			\item<2-> Okay, TikZ and Graphviz draw the image, but my tool computes the graph
+		\end{itemize}
+	\end{itemize}
+	\onslide<3->{
+	\medskip
+	\begin{center}
+	\begin{Large}
+		\alert{If the graph looks good to you, your firewall configuration is secure!}
+	\end{Large}
+	\end{center}
+	}
+	\begin{itemize}
+		\item<4-> My tool is secure!
+		\item<5-> What does this actually mean?
+		\begin{itemize}
+			\item<6-> It has no errors.
+			\item<7-> It does the right thing.
+			\item<8-> If it presents you a graph, and you LGTM the graph, the firewall config does the right thing.
+		\end{itemize}
 	\end{itemize}
 \end{frame}
 
 
 \begin{frame}
-	\frametitle{Theorem!}
+	\frametitle{Correctness Theorem!}
 		Assumes	
     \begin{itemize}
-	    \item Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
-	    \item $\free{\mvar{p}}$ is \texttt{NEW}% and has \texttt{SYN} set (if TCP)
-	    \item $\bigstep{\free{\mvar{rs}}}{\undecided}{\allow}$
-	    \item Let $(\free{V}, \free{E}) = \mfun{matrix}\ (\mdef{iifce}\ \free{p}, \mdef{oifce}\ \free{p}, \mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
+	    \item<1> Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
+	    \item<1> $\free{\mvar{p}}$ is \texttt{NEW}% and has \texttt{SYN} set (if TCP)
+	    \item \only<1,2,3>{$\bigstep{\free{\mvar{rs}}}{\undecided}{\allow}$} \only<2->{Firewall ruleset $\free{\mvar{rs}}$ accepts packet $\free{p}$}
+	    \begin{itemize}
+	    	\item<3-> gamma is all Linux matching features
+	    	\item<4-> placeholder
+	    	\item<5-> TODO TikZ sources overlay example to read last part (which is quite self contained)
+	    \end{itemize}
+	    \item Let $(\free{V}, \free{E}) = \mfun{compute\_graph}\ \free{p}\ (\mfun{simplify}\ \free{\mvar{rs}})$
     \end{itemize}
     Shows%
     \begin{center}%
@@ -136,6 +266,87 @@
     %Reads: If the firewall accepts a packet, we can look up source and destination IP in the graph.
 	\end{frame}
 
+
+
+\begin{frame}
+	\frametitle{Tool Implementation}
+		\begin{itemize}
+			\item Functions $\mfun{compute\_graph}$ and $\mfun{simplify}$
+			\item<2-> Around 5k LoC Haskell
+			\begin{itemize}
+				\item<3-> Machine-Generated
+			\end{itemize}
+			\item<4-> How long would it take you to review 5k of \only<4>{machine-generated}\only<5->{unreadable} Haskell?
+			\begin{itemize}
+				\item<6-> Answer: 0s
+				\item<7-> Let your computer do this!
+				\item<8-> $\dots$ once you reviewed the correctness theorem.
+				\item<9-> $\dots$ and a formal (= machine-verifiable) proof is shipped with the code.
+			\end{itemize}
+			\item<10-> Suddenly:
+			\begin{itemize}
+				\item Correctness of code \alert{taken for granted}.
+				\item Discuss and review the \alert{assumptions} of the code.
+			\end{itemize}
+		\end{itemize}
+\end{frame}
+
+
+
+\begin{frame}
+	\frametitle{Stats (approx.)}
+	\begin{itemize}
+		\item 5k LoC
+		\item 5 Lines of Theorem
+		\begin{itemize}
+			\item<2-> ``Just having to review 5 Lines of Theorem to get confidence in 5k LoC. Awesome!''
+		\end{itemize}
+		\item<3-> So what's the catch?
+		\begin{itemize}
+			\item<4-> 50k Lines of Formalization
+			\item<4-> Over 3 years.
+		\end{itemize}
+	\end{itemize}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{More Stats}
+	\begin{itemize}
+		\item Another Example: seL4 (verified microkernel)
+		\begin{itemize}
+			\item 8k Lines of C Code
+			\item 25 person-years
+			\item<2-> 10 person-months to add integrity and authority confinement.
+			\item<2-> 51 person-months to add IFS.
+		\end{itemize}
+		\item<3-> Hard: Write C, prove correctness
+		\item<4-> Simpler: Directly code in Theorem Prover, let Theorem Prover generate Haskell (or OCaml, or SML, or Scala, \dots)
+	\end{itemize}
+	\onslide<5->{
+	\medskip
+	\begin{center}
+	\begin{Large}
+		\alert{Tools are getting better!}
+	\end{Large}
+	\end{center}
+	}
+\end{frame}
+
+
+\begin{frame}
+	\frametitle{Give Isabelle/HOL a Try!}
+	\begin{itemize}
+		\item Write correct code.
+		\item Only correct code can be secure.
+		\item Reason about the correctness of your code.
+	\end{itemize}
+	\medskip
+	\begin{center}
+		\includegraphics[scale=.4]{isabelle.pdf}
+	\end{center}
+	\url{https://isabelle.in.tum.de/}
+\end{frame}
 
 
 \section{Lorem Ipsum}
