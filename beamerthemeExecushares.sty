@@ -14,7 +14,7 @@
 % taken from pickton on Adobe Kuler:
 % https://kuler.adobe.com/Some-Kind-Of-Execushares-color-theme-3837185/
 % https://color.adobe.com/create/color-wheel/?base=2&rule=Complementary&selected=3&name=My%20Color%20Theme&mode=rgb&rgbvalues=0.692156862745098,0.5781274393553625,0.07578160117802064,1,0.8722549407116571,0.30948616600790513,0.9921568627450981,0.8470588235294118,0.20784313725490197,0.006565914903510773,0.012916652104296475,0.692156862745098,0.20784313725490197,0.21510835913281434,0.9921568627450981&swatchOrder=0,1,2,3,4
-\definecolor{ExecusharesRed}{RGB}{253,216,53}% bsides yello %{230,37,52}
+\definecolor{ExecusharesYellow}{RGB}{253,216,53}% bsides yello %{230,37,52}
 \definecolor{ExecusharesBlack}{RGB}{0,0,0}
 \definecolor{ExecusharesBlue}{RGB}{2,3,176}
 \definecolor{ExecusharesWhite}{RGB}{250,249,255} % bsides grey, lighter
@@ -63,9 +63,9 @@
 % make the subitems also pixelated >, but a little smaller and red
 \setbeamertemplate{itemize subitem}{
 	\tikz{
-		\draw[fill=ExecusharesRed,draw=none] (0, 0) rectangle(0.075, 0.075);
-		\draw[fill=ExecusharesRed,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
-		\draw[fill=ExecusharesRed,draw=none] (0, 0.15) rectangle(0.075, 0.225);
+		\draw[fill=ExecusharesYellow,draw=none] (0, 0) rectangle(0.075, 0.075);
+		\draw[fill=ExecusharesYellow,draw=none] (0.075, 0.075) rectangle(0.15, 0.15);
+		\draw[fill=ExecusharesYellow,draw=none] (0, 0.15) rectangle(0.075, 0.225);
 	}
 }
 \fi
@@ -147,7 +147,7 @@
 		\ifnum\thepage=1\relax
 			% the title page
 			% draw the fills
-			\fill[color=ExecusharesRed] (0, 4cm) rectangle(\slidewidth,\slideheight);
+			\fill[color=ExecusharesYellow] (0, 4cm) rectangle(\slidewidth,\slideheight);
 
 			% draw the actual text
 			\node[anchor=south,text width=\slidewidth-1cm,inner xsep=0.5cm] at (0.5\slidewidth,4cm) {\begin{center}\includegraphics{bsides.png}\end{center}\bigskip\color{ExecusharesWhite}\Huge\textbf{\inserttitle}};
@@ -160,7 +160,7 @@
 		\else
 			% NOT the title page
 			% title bar
-			\fill[color=ExecusharesRed] (0, \slideheight-1cm) rectangle(\slidewidth,\slideheight);
+			\fill[color=ExecusharesYellow] (0, \slideheight-1cm) rectangle(\slidewidth,\slideheight);
 
 			% swap the comment on these to add section titles to slide titles
 			%\node[anchor=north,text width=11.8cm,inner xsep=0.5cm,inner ysep=0.25cm] at (6.4cm,9.6cm) {\color{ExecusharesWhite}\Large\textbf{\insertsectionhead: \insertframetitle}};
@@ -171,7 +171,7 @@
 			\ifnum \value{showProgressBar}>0\relax%
 				% the the progress bar icon in the middle of the screen
 				\draw[fill=ExecusharesGrey,draw=none] (0cm,0cm) rectangle(\slidewidth,0.25cm);
-				\draw[fill=ExecusharesRed,draw=none] (0cm,0cm) rectangle(\progressbar@tmpdim,0.25cm);
+				\draw[fill=ExecusharesYellow,draw=none] (0cm,0cm) rectangle(\progressbar@tmpdim,0.25cm);
 
 				% bottom information
 				%\node[anchor=south west] at(0cm,0.25cm) {\color{ExecusharesGrey}\tiny\vphantom{lp}\insertsection};
@@ -216,7 +216,7 @@
 		\useasboundingbox (0,0) rectangle(\slidewidth,\slideheight);
 		%\fill[color=ExecusharesWhite] (0,0) rectangle(\the\paperwidth,\the\paperheight);
 		\fill[color=ExecusharesWhite] (-1cm, 2cm) rectangle (\slidewidth, \slideheight+0.1cm);
-		\fill[color=ExecusharesRed] (-1cm, 0.5\slideheight-1cm) rectangle(\slidewidth, 0.5\slideheight+1cm);
+		\fill[color=ExecusharesYellow] (-1cm, 0.5\slideheight-1cm) rectangle(\slidewidth, 0.5\slideheight+1cm);
 		\node[text width=\the\paperwidth-1cm,align=center] at (0.4\slidewidth, 0.5\slideheight) {\color{ExecusharesWhite}\Huge\textbf{\insertsection}};
 	\end{tikzpicture}
 }
