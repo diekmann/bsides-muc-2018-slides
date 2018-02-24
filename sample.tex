@@ -120,11 +120,11 @@
 \begin{frame}
 	\frametitle{About Me}
 	\begin{itemize}
-		\item I did this work as PhD.\ student at TUM
+		\item I did this work as PhD student at TUM
 		\begin{itemize}
 			\item Which was awesome!
 		\end{itemize}
-		\item Now work at Google
+		\item Now I work at Google
 		\begin{itemize}
 			\item Which is awesome, too!
 			\item This presentation is not related in any way to Google
@@ -201,7 +201,7 @@ COMMIT
 	\node[align=center,text width=4cm] (a) at (-4,-3) {\only<1-4>{$131.159.21.0/24$}\only<5->{\begin{large}Internal\end{large}}}; %internal
 	\node[align=center,text width=4cm] (b) at (4,-3) {\only<1-5>{$131.159.15.240/28$}\only<6->{\begin{large}DMZ\end{large}}}; %dmz
 	\node<1>[align=left] (c) at (0,-4.5) {$127.0.0.0/8$};
-	\node[align=center,text width=4cm,cloud, draw,cloud puffs=8,cloud puff arc=120, aspect=2, inner sep=-1.3em,outer sep=0] (d) at (0,0) {\only<1,2>{$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$}\only<3>{\begin{large}Neuland\end{large}}\only<4->{\begin{large}Internet\end{large}}};
+	\node[align=center,text width=4cm,cloud, draw,cloud puffs=8,cloud puff arc=120, aspect=2, inner sep=-1.3em,outer sep=0, fill=ExecusharesWhite] (d) at (0,0) {\only<1,2>{$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$}\only<3>{\begin{large}Neuland\end{large}}\only<4->{\begin{large}Internet\end{large}}};
 	
 	\draw[myptr] (a) to[loop above] (a);
 	\draw[myptr] (a) to (b);
@@ -254,6 +254,7 @@ COMMIT
 
 \begin{frame}[fragile]
 	\frametitle{Correctness Theorem!}
+	\vspace*{5ex}
 		Assumes	
     \begin{itemize}
 	    \item<1> Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
@@ -277,7 +278,7 @@ COMMIT
 	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<13>{\bound{\mvar{s}_\text{repr}}} = \mdef{Some}\ \highlight<14>{\bound{\mvar{s}_\text{range}}} \ \wedge \ \highlight<15>{(\mdef{src}\ \free{\mvar{p}}) \in \highlight<14>{\bound{\mvar{s}_\text{range}}}} \ \wedge \\
 	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<13>{\bound{\mvar{d}_\text{repr}}} = \mdef{Some}\ \highlight<14>{\bound{\mvar{d}_\text{range}}} \ \wedge \ \highlight<15>{(\mdef{dst}\ \free{\mvar{p}}) \in \highlight<14>{\bound{\mvar{d}_\text{range}}}}
 	    \end{IEEEeqnarray*}}
-	    \onslide<17->{We can find an arrow from \ $\mdef{src}\ \free{\mvar{p}}$ $\longrightarrow$ $\mdef{dst}\ \free{\mvar{p}}$ \ in the graph.}
+	    \onslide<17->{In the graph, we can find an arrow from \ $\mdef{src}\ \free{\mvar{p}}$ $\longrightarrow$ $\mdef{dst}\ \free{\mvar{p}}$}
 	    
 	    \onslide<18->{Warning: The other direction may not hold!}
 	    \end{overprint}
@@ -387,7 +388,7 @@ $\dots$\\
 	\end{itemize}
 	\medskip
 	\begin{center}
-		\includegraphics[scale=.4]{isabelle.pdf}
+		\includegraphics[scale=.2]{isabelle.pdf}
 	\end{center}
 	\url{https://isabelle.in.tum.de/}
 \end{frame}
