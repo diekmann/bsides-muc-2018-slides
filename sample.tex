@@ -26,7 +26,9 @@
 %requires at least TikZ 3.0.0!
 %\usetikzlibrary{arrows.meta}
 \usetikzlibrary{arrows.meta} %need pgf > 3.0.
-\tikzset{myptr/.style={-{Latex[scale=1.5]}}}
+\tikzset{myptr/.style={-{Latex[scale=2.5]}}}
+
+\tikzset{every loop/.style={min distance=10mm,looseness=10}}
 
 
 
@@ -196,23 +198,23 @@ COMMIT
 \resizebox{\linewidth}{!}{%
 \scriptsize
   \begin{tikzpicture}
-  \node[align=left] (a) at (-4,-4) {$\{131.159.21.0 .. 131.159.21.255\}$}; %internal
-\node[align=left] (b) at (4,-4) {$\{131.159.15.240 .. 131.159.15.255\}$}; %dmz
-\node[align=left] (c) at (0,-6) {$\{127.0.0.0 .. 127.255.255.255\}$};
-\node[align=center,text width=4cm,cloud, draw,cloud puffs=10,cloud puff arc=120, aspect=2, inner sep=-3em,outer sep=0] (d) at (0,0) {$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$};
-
-\draw[myptr] (a) to[loop above] (a);
-\draw[myptr] (a) to (b);
-\draw[myptr] (a) to (c);
-\draw[myptr] (a) to (d);
-\draw[myptr] (b) to[loop above] (b);
-\draw[myptr] (b) to (c);
-\draw[myptr] (b) to (d);
-\draw[myptr] (c) to (a);
-\draw[myptr] (c) to (b);
-\draw[myptr] (c) to[loop above] (c);
-\draw[myptr] (c) to (d);
-\draw[myptr] (d) to (b);
+	\node[align=center,text width=4cm] (a) at (-4,-3) {\only<1-4>{$131.159.21.0/24$}\only<5->{\begin{large}Internal\end{large}}}; %internal
+	\node[align=center,text width=4cm] (b) at (4,-3) {\only<1-5>{$131.159.15.240/28$}\only<6->{\begin{large}DMZ\end{large}}}; %dmz
+	\node<1>[align=left] (c) at (0,-4.5) {$127.0.0.0/8$};
+	\node[align=center,text width=4cm,cloud, draw,cloud puffs=8,cloud puff arc=120, aspect=2, inner sep=-1.3em,outer sep=0] (d) at (0,0) {\only<1,2>{$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$}\only<3>{\begin{large}Neuland\end{large}}\only<4->{\begin{large}Internet\end{large}}};
+	
+	\draw[myptr] (a) to[loop above] (a);
+	\draw[myptr] (a) to (b);
+	\draw<1>[myptr] (a) to (c);
+	\draw[myptr] (a) to (d);
+	\draw[myptr] (b) to[loop above] (b);
+	\draw<1>[myptr] (b) to (c);
+	\draw[myptr] (b) to (d);
+	\draw<1>[myptr] (c) to (a);
+	\draw<1>[myptr] (c) to (b);
+	\draw<1>[myptr] (c) to[loop below] (c);
+	\draw<1>[myptr] (c) to (d);
+	\draw[myptr] (d) to (b);
   \end{tikzpicture}%
 }
 \end{frame}
@@ -256,47 +258,49 @@ COMMIT
     \begin{itemize}
 	    \item<1> Unfolded $\free{\mvar{rs}}$ for $\free{\Gamma}$
 	    \item<1> $\free{\mvar{p}}$ is \texttt{NEW}% and has \texttt{SYN} set (if TCP)
-	    \item \only<1,2,3>{$\bigstep{\highlight<3>{\free{\gamma}}}{\free{p}}{\free{\mvar{rs}}}{\undecided}{\allow}$\qquad} \only<2->{``Firewall with ruleset $\free{\mvar{rs}}$ accepts packet $\free{p}$''}
+	    \item \only<1-6>{\highlight<3,4>{$\bigstep{\highlight<5>{\free{\gamma}}}{\free{p}}{\free{\mvar{rs}}}{\undecided}{\allow}$}\qquad} \only<4->{``Firewall with ruleset $\free{\mvar{rs}}$ accepts packet $\free{p}$''}
 	    \begin{itemize}
-	    	\item<3-> $\free{\gamma}$: arbitrary function
-	    	\item<4-> placeholder
-	    	\item<5-> TODO TikZ sources overlay example to read last part (which is quite self contained)
+	    	\item<5-> \only<5,6>{$\free{\gamma}$: arbitrary function\qquad}\only<6->{For \emph{all} iptables matching features}
 	    \end{itemize}
 	    \item Let $(\free{V}, \free{E}) = \mfun{compute\_graph}\ (\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
 	    \begin{itemize}
-	    	\item $(\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})$: Example $(\mvar{tcp}, 42242, 22)$
+	    	\item $(\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})$: Example $(\mvar{tcp},\ 42242,\ 80)$
 	    \end{itemize}
     \end{itemize}
     Shows%
     \begin{center}%
 	    \vskip-3ex%
+	    \begin{overprint}
+	    \onslide<1-16>{
         \begin{IEEEeqnarray*}{l}
-	    \exists \highlight<10>{\bound{\mvar{s}_\text{repr}}}\ \highlight<10>{\bound{\mvar{d}_\text{repr}}}\ \bound{\mvar{s}_\text{range}}\ \bound{\mvar{d}_\text{range}}.\ \ (\highlight<10>{\bound{\mvar{s}_\text{repr}}}, \highlight<10>{\bound{\mvar{d}_\text{repr}}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
-	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<10>{\bound{\mvar{s}_\text{repr}}} = \mdef{Some}\ \bound{\mvar{s}_\text{range}} \ \wedge \ (\mdef{src}\ \free{\mvar{p}}) \in \bound{\mvar{s}_\text{range}} \ \wedge \\
-	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<10>{\bound{\mvar{d}_\text{repr}}} = \mdef{Some}\ \bound{\mvar{d}_\text{range}} \ \wedge \ (\mdef{dst}\ \free{\mvar{p}}) \in \bound{\mvar{d}_\text{range}}
-	    \end{IEEEeqnarray*}
+	    \exists \highlight<13>{\bound{\mvar{s}_\text{repr}}}\ \highlight<13>{\bound{\mvar{d}_\text{repr}}}\ \highlight<14>{\bound{\mvar{s}_\text{range}}}\ \highlight<14>{\bound{\mvar{d}_\text{range}}}.\ \ (\highlight<13>{\bound{\mvar{s}_\text{repr}}}, \highlight<13>{\bound{\mvar{d}_\text{repr}}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<13>{\bound{\mvar{s}_\text{repr}}} = \mdef{Some}\ \highlight<14>{\bound{\mvar{s}_\text{range}}} \ \wedge \ \highlight<15>{(\mdef{src}\ \free{\mvar{p}}) \in \highlight<14>{\bound{\mvar{s}_\text{range}}}} \ \wedge \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<13>{\bound{\mvar{d}_\text{repr}}} = \mdef{Some}\ \highlight<14>{\bound{\mvar{d}_\text{range}}} \ \wedge \ \highlight<15>{(\mdef{dst}\ \free{\mvar{p}}) \in \highlight<14>{\bound{\mvar{d}_\text{range}}}}
+	    \end{IEEEeqnarray*}}
+	    \onslide<17->{We can find an arrow from \ $\mdef{src}\ \free{\mvar{p}}$ $\longrightarrow$ $\mdef{dst}\ \free{\mvar{p}}$ \ in the graph.}
+	    \end{overprint}
     \end{center}
     \medskip
     %Reads: If the firewall accepts a packet, we can look up source and destination IP in the graph.
 
 	% such meta meta!
 	\begin{tikzpicture}[overlay]
-	    \node<5,6,7,8>[fill=white, draw=black, line width=3pt, inner sep=10pt] (tikzmeta) at (current page.center) {\begin{minipage}{.9\linewidth}
+	    \node<8-11>[fill=white, draw=black, line width=3pt, inner sep=10pt] (tikzmeta) at (current page.center) {\begin{minipage}{.6\linewidth}
 \footnotesize
 \texttt{\textbackslash{}begin\{tikzpicture\}}\\
-\texttt{\hspace*{1ex}\textbackslash{}node (\highlight<6>{a}) at (-4,-4) \{\highlight<7>{\$\textbackslash{}\{131.159.21.0 .. 131.159.21.255\textbackslash{}\}\$}\};}\\
-\texttt{\hspace*{1ex}\textbackslash{}node (b) at (4,-4) \{\$\textbackslash{}\{131.159.15.240 .. 131.159.15.255\textbackslash{}\}\$\};}\\
-\texttt{\hspace*{1ex}\textbackslash{}node (c) at (0,-6) \{\$\textbackslash{}\{127.0.0.0 .. 127.255.255.255\textbackslash{}\}\$\};}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (\highlight<9>{a}) at (-4,-4) \{\highlight<10>{\$131.159.21.0/24\$}\};}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (b) at (4,-4) \{\$131.159.15.240/28\$\};}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (c) at (0,-6) \{\$127.0.0.0/8\$\};}\\
 $\dots$\\
 
-\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<8>{a}) to (\highlight<8>{a});}\\
-\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<8>{a}) to (\highlight<8>{b});}\\
-\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<8>{a}) to (\highlight<8>{c});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<11>{a}) to (\highlight<11>{a});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<11>{a}) to (\highlight<11>{b});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<11>{a}) to (\highlight<11>{c});}\\
 $\dots$\\
 \verb~\textbackslash{}end\{tikzpicture\}~
 \end{minipage}};
 	\end{tikzpicture}
-\only<8>{}%force another slide    
+\only<16>{}%force another slide    
     
 \end{frame}
 
