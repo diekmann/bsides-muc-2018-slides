@@ -119,18 +119,31 @@
 \section{About Me}
 \begin{frame}
 	\frametitle{About Me}
-	\begin{itemize}
-		\item I did this work as PhD student at TUM
+	\begin{columns}
+	\begin{column}{0.5\textwidth}
 		\begin{itemize}
-			\item Which was awesome!
+			\item I did this work as PhD student at TUM
+			\begin{itemize}
+				\item Which was awesome!
+			\end{itemize}
+			\item Now I work at Google
+			\begin{itemize}
+				\item Which is awesome, too!
+				\item This presentation is not related in any way to Google
+			\end{itemize}
 		\end{itemize}
-		\item Now I work at Google
-		\begin{itemize}
-			\item Which is awesome, too!
-			\item This presentation is not related in any way to Google
-		\end{itemize}
-		\item Thoughts and opinions are my own, not those of my company.
-	\end{itemize}
+	\end{column}
+	\begin{column}{0.5\textwidth}
+	    \begin{center}
+	     \includegraphics[width=0.99\textwidth]{meta2.png}\\
+	     {\scriptsize Fig 1.: Me pointing at slides pointing at slides.}
+	     \end{center}
+	\end{column}
+	\end{columns}
+	\bigskip
+	\begin{center}
+		Thoughts and opinions are my own, not those of my company.
+	\end{center}
 \end{frame}
 
 
@@ -151,11 +164,11 @@
 %break symbol $\hookleftarrow$
 % frame=single,label=Upper Closure
 \footnotesize
+%:INPUT DROP [0:0]
+%:OUTPUT DROP [0:0]
 \begin{Verbatim}[commandchars=\\\{\},codes={\catcode`$=3\catcode`^=7}]
 *filter
-:INPUT DROP [0:0]
 :FORWARD DROP [0:0]
-:OUTPUT DROP [0:0]
 :DOS_PROTECT - [0:0]
 :GOOD~STUFF - [0:0]
 -A FORWARD -j DOS_PROTECT
