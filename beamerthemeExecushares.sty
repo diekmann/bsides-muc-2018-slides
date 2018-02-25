@@ -121,6 +121,7 @@
 \slidewidth=\the\paperwidth
 \slideheight=\the\paperheight
 
+
 % use tikz to draw everything
 % it may not be the best, but it's easy to work with
 % and looks good
@@ -163,6 +164,7 @@
 			% NOT the title page
 			% title bar
 			\fill[color=ExecusharesYellow] (0, \slideheight-1cm) rectangle(\slidewidth,\slideheight);
+
 
 			% swap the comment on these to add section titles to slide titles
 			%\node[anchor=north,text width=11.8cm,inner xsep=0.5cm,inner ysep=0.25cm] at (6.4cm,9.6cm) {\color{ExecusharesWhite}\Large\textbf{\insertsectionhead: \insertframetitle}};
@@ -210,7 +212,7 @@
 \makeatother
 
 % add section titles
-\AtBeginSection{\frame{\sectionpage}}
+\AtBeginSection{\frame[c]{\sectionpage}}
 \setbeamertemplate{section page}
 {
 	\begin{tikzpicture}
