@@ -280,24 +280,24 @@ COMMIT
 	    \begin{itemize}
 	    	\item<5-> \only<5,6>{$\free{\gamma}$: arbitrary function\qquad}\only<6->{For \emph{all} iptables matching features}
 	    \end{itemize}
-	    \item Let $(\free{V}, \free{E}) = \mfun{compute\_graph}\ (\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})\ (\mfun{simplify}\ \free{\mvar{rs}})$
+	    \item $\highlight<8>{\textnormal{Let } (\free{V}, \free{E}) =} \highlight<10>{\mfun{compute\_graph}}\ \highlight<11>{(\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})}\ \highlight<9>{(\mfun{simplify}\ \free{\mvar{rs}})}$
 	    \begin{itemize}
-	    	\item $(\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})$: Example $(\mvar{tcp},\ 42242,\ 80)$
+	    	\item<11-> $(\mdef{prot}\ \free{p}, \mdef{sport}\ \free{p}, \mdef{dport}\ \free{p})$: Example $(\mvar{tcp},\ 42242,\ 80)$
 	    \end{itemize}
     \end{itemize}
     Shows%
     \begin{center}%
 	    \vskip-3ex%
 	    \begin{overprint}
-	    \onslide<1-16>{
+	    \onslide<1-20>{
         \begin{IEEEeqnarray*}{l}
-	    \exists \highlight<13>{\bound{\mvar{s}_\text{repr}}}\ \highlight<13>{\bound{\mvar{d}_\text{repr}}}\ \highlight<14>{\bound{\mvar{s}_\text{range}}}\ \highlight<14>{\bound{\mvar{d}_\text{range}}}.\ \ (\highlight<13>{\bound{\mvar{s}_\text{repr}}}, \highlight<13>{\bound{\mvar{d}_\text{repr}}}) \in  \mdef{set}\ \free{\mvar{E}} \  \wedge  \\
-	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<13>{\bound{\mvar{s}_\text{repr}}} = \mdef{Some}\ \highlight<14>{\bound{\mvar{s}_\text{range}}} \ \wedge \ \highlight<15>{(\mdef{src}\ \free{\mvar{p}}) \in \highlight<14>{\bound{\mvar{s}_\text{range}}}} \ \wedge \\
-	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<13>{\bound{\mvar{d}_\text{repr}}} = \mdef{Some}\ \highlight<14>{\bound{\mvar{d}_\text{range}}} \ \wedge \ \highlight<15>{(\mdef{dst}\ \free{\mvar{p}}) \in \highlight<14>{\bound{\mvar{d}_\text{range}}}}
+	    \exists \highlight<18>{\bound{\mvar{s}_\text{repr}}}\ \highlight<18>{\bound{\mvar{d}_\text{repr}}}\ \highlight<19>{\bound{\mvar{s}_\text{range}}}\ \highlight<19>{\bound{\mvar{d}_\text{range}}}.\ \ \highlight<20>{(\highlight<18>{\bound{\mvar{s}_\text{repr}}}, \highlight<18>{\bound{\mvar{d}_\text{repr}}}) \in \ \free{\mvar{E}}} \  \wedge  \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<18>{\bound{\mvar{s}_\text{repr}}} = \mdef{Some}\ \highlight<19>{\bound{\mvar{s}_\text{range}}} \ \wedge \ \highlight<20>{(\mdef{src}\ \free{\mvar{p}}) \in \highlight<19>{\bound{\mvar{s}_\text{range}}}} \ \wedge \\
+	    \qquad (\mfun{map\_of}\ \free{\mvar{V}})\ \highlight<18>{\bound{\mvar{d}_\text{repr}}} = \mdef{Some}\ \highlight<19>{\bound{\mvar{d}_\text{range}}} \ \wedge \ \highlight<20>{(\mdef{dst}\ \free{\mvar{p}}) \in \highlight<19>{\bound{\mvar{d}_\text{range}}}}
 	    \end{IEEEeqnarray*}}
-	    \onslide<17->{In the graph, we can find an arrow from \ $\mdef{src}\ \free{\mvar{p}}$ $\longrightarrow$ $\mdef{dst}\ \free{\mvar{p}}$}
+	    \onslide<21->{In the graph, we can find an arrow from \ $\mdef{src}\ \free{\mvar{p}}$ $\longrightarrow$ $\mdef{dst}\ \free{\mvar{p}}$}
 	    
-	    \onslide<18->{Warning: The other direction may not hold!}
+	    \onslide<22->{Warning: The other direction may not hold!}
 	    \end{overprint}
     \end{center}
     \medskip
@@ -305,22 +305,21 @@ COMMIT
 
 	% such meta meta!
 	\begin{tikzpicture}[overlay]
-	    \node<8-11>[fill=white, draw=black, line width=3pt, inner sep=10pt] (tikzmeta) at (current page.center) {\begin{minipage}{.6\linewidth}
+	    \node<13-16>[fill=white, draw=black, line width=3pt, inner sep=10pt] (tikzmeta) at (current page.center) {\begin{minipage}{.6\linewidth}
 \footnotesize
 \texttt{\textbackslash{}begin\{tikzpicture\}}\\
-\texttt{\hspace*{1ex}\textbackslash{}node (\highlight<9>{a}) at (-4,-4) \{\highlight<10>{\$131.159.21.0/24\$}\};}\\
+\texttt{\hspace*{1ex}\textbackslash{}node (\highlight<14>{a}) at (-4,-4) \{\highlight<15>{\$131.159.21.0/24\$}\};}\\
 \texttt{\hspace*{1ex}\textbackslash{}node (b) at (4,-4) \{\$131.159.15.240/28\$\};}\\
 \texttt{\hspace*{1ex}\textbackslash{}node (c) at (0,-6) \{\$127.0.0.0/8\$\};}\\
 $\dots$\\
 
-\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<11>{a}) to (\highlight<11>{a});}\\
-\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<11>{a}) to (\highlight<11>{b});}\\
-\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<11>{a}) to (\highlight<11>{c});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<16>{a}) to (\highlight<16>{a});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<16>{a}) to (\highlight<16>{b});}\\
+\texttt{\hspace*{1ex}\textbackslash{}draw (\highlight<16>{a}) to (\highlight<16>{c});}\\
 $\dots$\\
 \verb~\textbackslash{}end\{tikzpicture\}~
 \end{minipage}};
-	\end{tikzpicture}
-\only<16>{}%force another slide    
+	\end{tikzpicture} 
     
 \end{frame}
 
