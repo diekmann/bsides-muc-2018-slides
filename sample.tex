@@ -255,15 +255,15 @@ COMMIT
 	\end{Large}
 	\end{center}
 	}
-	\begin{itemize}
-		\item<4-> My tool is secure!
-		\item<5-> What does this actually mean?
-		\begin{itemize}
-			\item<6-> It has no errors.
-			\item<7-> It does the right thing.
-			\item<8-> If it presents you a graph, and you LGTM the graph, the firewall config does the right thing.
-		\end{itemize}
-	\end{itemize}
+	%\begin{itemize}
+	%	\item<4-> My tool is secure!
+	%	\item<5-> What does this actually mean?
+	%	\begin{itemize}
+	%		\item<6-> It has no errors.
+	%		\item<7-> It does the right thing.
+	%		\item<8-> If it presents you a graph, and you LGTM the graph, the firewall config does the right thing.
+	%	\end{itemize}
+	%\end{itemize}
 \end{frame}
 
 
@@ -331,7 +331,7 @@ $\dots$\\
 	\frametitle{Tool Implementation}
 	\vspace*{5ex}
 		\begin{itemize}
-			\item Functions $\mfun{compute\_graph}$ and $\mfun{simplify}$
+			\item Functions \alert{$\mfun{compute\_graph}$} and \alert{$\mfun{simplify}$}
 			\item<2-> Around 5k LoC Haskell
 			\begin{itemize}
 				\item<3-> Machine-Generated
@@ -376,23 +376,24 @@ $\dots$\\
 	\vspace*{5ex}
 	\begin{itemize}
 		\item Another Example: seL4 (verified microkernel)
+		\item<2-> by {\baselineskip-10pt\fontsize{3}{6} \selectfont June Andronick, Callum Bannister, Joel Beeren, Nelson Billing, Bernard Blackham, Timothy Bourke, Andrew Boyton, Matthew Brassil, Aleksander Budzynowski, Manuel Chakravarty, Xi Ma Chen, Nahida Chowdhury, Peter Chubb, David Cock, Adrian Danis, Matthias Daum, Jeremy Dawson, Philip Derrin, Dhammika Elkaduwe, Kevin Elphinstone, Kai Engelhardt, Matthew Fernandez, Peter Gammie, Xin Gao, Dean Garden, Gianpaolo Gioiosa, David Greenaway, Matthew Grosvenor, Lukas Haenel, Gernot Heiser, Rohan Jacob-Rao, Benjamin Kalman, Justin King-Lacroix, Gerwin Klein, Rafal Kolanski, Alexander Kroh, Etienne Le Sueur, Corey Lewis, Japheth Lim, Anna Lyons, Tran Ma, Daniel Matichuk, Stephanie McArthur, Sam McNally, Jia Meng, Catherin Menon, Toby Murray, Magnus Myreen, Michael Norrish, Liam O'Connor, Ameya Palande, Sean Peters, Simon Rodgers, Sean Seefried, Thomas Sewell, Rupert Shuttleworth, Vernon Tang, Michael von Tessin, David Tsai, Harvey Tuch, Adam Walker, James Wilmot, Simon Winwood, and Jiawei Xie\par}
 		\begin{itemize}
-			\item 8k Lines of C Code
-			\item 25 person-years
-			\item<2-> 10 person-months to add integrity and authority confinement.
-			\item<2-> 51 person-months to add IFS.
+			\item<3-> 8k Lines of C Code
+			\item<4-> 25 person-years
+			\item<5-> 10 person-months to add integrity and authority confinement.
+			\item<5-> 51 person-months to add IFS.
 		\end{itemize}
-		\item<3-> Hard: Write C, prove correctness
-		\item<4-> Simpler: Directly code in Theorem Prover, let Theorem Prover generate Haskell (or OCaml, or SML, or Scala, \dots)
+		%\item<5-> Hard: Write C, prove correctness
+		%\item<6-> Simpler: Directly code in Theorem Prover, let Theorem Prover generate Haskell (or OCaml, or SML, or Scala, \dots)
 	\end{itemize}
-	\onslide<5->{
-	\medskip
-	\begin{center}
-	\begin{Large}
-		\alert{Tools are getting better!}
-	\end{Large}
-	\end{center}
-	}
+	%\onslide<5->{
+	%\medskip
+	%\begin{center}
+	%\begin{Large}
+	%	\alert{Tools are getting better!}
+	%\end{Large}
+	%\end{center}
+	%}
 \end{frame}
 
 
