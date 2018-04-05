@@ -4,7 +4,7 @@
 
 \usetheme{Execushares}
 
-\title{Formal Methods to the Rescue? Experiences Coding in a Theorem Prover}
+\title{Formal Methods to the Rescue?\\\huge{Experiences Coding in a Theorem Prover}}
 \subtitle{\url{https://github.com/diekmann/} \  @popitter\_net}
 \author{Cornelius Diekmann}
 \date{April 9, 2018}
@@ -214,25 +214,28 @@ COMMIT
 \resizebox{\linewidth}{!}{%
 \scriptsize
   \begin{tikzpicture}
-	\node[align=center,text width=4cm] (a) at (-4,-3) {\only<1-4>{$131.159.21.0/24$}\only<5->{\begin{large}Internal\end{large}}}; %internal
-	\node[align=center,text width=4cm] (b) at (4,-3) {\only<1-5>{$131.159.15.240/28$}\only<6->{\begin{large}DMZ\end{large}}}; %dmz
-	\node<1>[align=left] (c) at (0,-4.5) {$127.0.0.0/8$};
-	\node[align=center,text width=4cm,cloud, draw,cloud puffs=8,cloud puff arc=120, aspect=2, inner sep=-1.3em,outer sep=0, fill=ExecusharesWhite] (d) at (0,0) {\only<1,2>{$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$}\only<3>{\begin{large}Neuland\end{large}}\only<4->{\begin{large}Internet\end{large}}};
+	\node[align=center,text width=4cm] (a) at (-4,-3) {\only<1-6>{$131.159.21.0/24$}\only<7->{\begin{large}Internal\end{large}}}; %internal
+	\node[align=center,text width=4cm] (b) at (4,-3) {\only<1-7>{$131.159.15.240/28$}\only<8->{\begin{large}DMZ\end{large}}}; %dmz
+	\node<1-3>[align=left] (c) at (0,-4.5) {\highlight<3>{$127.0.0.0/8$}};
+	\node[align=center,text width=4cm,cloud, draw,cloud puffs=8,cloud puff arc=120, aspect=2, inner sep=-1.3em,outer sep=0, fill=ExecusharesWhite] (d) at (0,0) {\only<1-4>{$\{0.0.0.0 .. 126.255.255.255\} \cup \{128.0.0.0 .. 131.159.15.239\} \cup \{131.159.16.0 .. 131.159.20.255\} \cup \{131.159.22.0 .. 255.255.255.255\}$}\only<5>{\begin{large}Neuland\end{large}}\only<6->{\begin{large}Internet\end{large}}};
 	
 	\draw[myptr] (a) to[loop above] (a);
 	\draw[myptr] (a) to (b);
-	\draw<1>[myptr] (a) to (c);
+	\draw<1-3>[myptr] (a) to (c);
 	\draw[myptr] (a) to (d);
 	\draw[myptr] (b) to[loop above] (b);
-	\draw<1>[myptr] (b) to (c);
+	\draw<1-3>[myptr] (b) to (c);
 	\draw[myptr] (b) to (d);
-	\draw<1>[myptr] (c) to (a);
-	\draw<1>[myptr] (c) to (b);
-	\draw<1>[myptr] (c) to[loop below] (c);
-	\draw<1>[myptr] (c) to (d);
+	\draw<1-3>[myptr] (c) to (a);
+	\draw<1-3>[myptr] (c) to (b);
+	\draw<1-3>[myptr] (c) to[loop below] (c);
+	\draw<1-3>[myptr] (c) to (d);
 	\draw[myptr] (d) to (b);
   \end{tikzpicture}%
 }
+	\begin{tikzpicture}[overlay]
+	    \node<2>[fill=white, draw=black, line width=3pt, inner sep=10pt] (explain) at ($(current page.center) + (+17ex,-17ex)$) {$\free{A}$ \tikz[baseline]{\draw [myptr] (0,.7ex)--(.7,.7ex);} $\free{B}$ \ means $\free{A}$ can connect to $\free{B}$};
+	\end{tikzpicture}
 \end{frame}
 
 
