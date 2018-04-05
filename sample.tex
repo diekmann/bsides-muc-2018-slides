@@ -400,7 +400,23 @@ $\dots$\\
 \end{frame}
 
 
-\section{Wrap up}
+\section{Takeaway}
+
+\begin{frame}
+	\frametitle{Takeaway}
+	\vspace*{5ex}
+	\begin{itemize}
+		\itemsep2ex
+		\item Tool to verify iptables
+		\begin{itemize}
+			\item \url{https://github.com/diekmann/Iptables_Semantics}
+		\end{itemize}
+ 		\item<2-> Verifying the verifier was great fun
+ 		\begin{itemize}
+			\item \texttt{Yo\_Dawg.jpg}
+		\end{itemize}
+	\end{itemize}
+\end{frame}
 
 \begin{frame}
 	\frametitle{Give Isabelle/HOL a Try!}
@@ -422,10 +438,12 @@ $\dots$\\
 \appendix
 \backupbegin
 
-\section{Conclusions}
+\section{TL;DR}
 
 \begin{frame}
-	\frametitle{Closing Thoughts}
+	\frametitle{Talk Summary}
+	\vspace*{5ex}
+	\begin{small}
 	It took me over 3 years to code ~5k LoC. Not very impressive. However, that code is is correct! According to an independent self-conducted study (pun intended), it is also the best open-source iptables analyzer out there. The value is not the 5k LoC, but rather 5 Lines of Theorem which show that the 5k LoC are correct.
 
 In this talk, I don’t want to walk you over the 5k lines of machine-generated Haskell code. Nor do I want to show you the 50k lines of formalization needed. I just want to show you the 5 Lines of the Theorem. Is this enough to convince you about the correctness of the iptables analyzer?
@@ -433,6 +451,7 @@ In this talk, I don’t want to walk you over the 5k lines of machine-generated 
 Neighbors, feel free to question anybody who does formalism for the sake of pretending to be a scientist. Formalism has a clear value: It is more expressive than our programming languages. And it is a nice language to precisely state the high-level requirements of our software. And here lies the true value: Computers understand rigorous formalism, too. Computers can check proofs, so you don’t have to. Just inspect 5 Lines of Theorem to get confidence in the correctness of 5k LoC. This approach seems to scale.*
 
 *) given an infinite supply of PhD students who do the proofs for you.
+	\end{small}
 \end{frame}
 
 
