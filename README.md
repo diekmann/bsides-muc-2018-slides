@@ -6,7 +6,8 @@ License:
 
  * Beamer template is MIT
  * highlight.tex is copy&paste from stackoverflow and thus likely CC-BY-SA
- * images have no license specified
+ * bsides logo is based on https://de.wikipedia.org/wiki/Datei:Silhouette_of_Munich.svg cc-by-sa. Thanks Stefan Meister.
+ * Other images have no license specified, but are used with permission.
 
 Running:
 
